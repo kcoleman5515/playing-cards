@@ -1,12 +1,12 @@
 package edu.cnm.deepdive;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public class Deck implements Iterable<Card> {
 
   private final List<Card> cards;
 
@@ -35,6 +35,11 @@ public class Deck {
   }
   public void sort() {
     Collections.sort(cards);
+  }
+
+  @Override
+  public Iterator<Card> iterator() {
+    return cards.iterator();
   }
 }
 

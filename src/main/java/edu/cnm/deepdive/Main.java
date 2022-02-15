@@ -6,6 +6,9 @@ public class Main {
     Deck d = new Deck();
     System.out.println(d);
     d.shuffle();
+    for (Card c : d) {
+      System.out.println(c);
+    }
     System.out.println(d);
     d.sort();
   }
