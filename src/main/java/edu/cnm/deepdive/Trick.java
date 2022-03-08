@@ -13,14 +13,16 @@ public class Trick {
   public static void main(String[] args) {
 
     Random rng = new SecureRandom();
-    List<Card> deck = createDeck(rng );
+    List<Card> deck = createDeck(rng);
     List<Card> redPile = new ArrayList<>();
     List<Card> blackPile = new ArrayList<>();
-    sortCards(deck,redPile, blackPile);
+    sortCards(deck, redPile, blackPile);
     swapCards(redPile, blackPile, rng);
-
-    // TODO Sort the piles.
+    Collections.sort(redPile);
+    Collections.sort(blackPile);
     // TODO Count & print out the cards and the count.
+    printContents(redPile, Color.RED);
+    printContents(blackPile, Color.BLACK);
   }
 
   private static List<Card> createDeck(Random rng) {
@@ -34,9 +36,8 @@ public class Trick {
     return deck;
   }
 
-  private static void sortCards (List<Card> deck, List<Card> redPile, List<Card> blackPile) {
-
-    for (Iterator<Card> iter = deck.iterator() ; iter.hasNext() ; ){
+  private static void sortCards(List<Card> deck, List<Card> redPile, List<Card> blackPile) {
+    for (Iterator<Card> iter = deck.iterator(); iter.hasNext(); ) {
       Card selector = iter.next();
       Card card = iter.next();
       if (selector.getSuit().getColor() == Color.RED) {
@@ -54,4 +55,16 @@ public class Trick {
       redPile.add(blackPile.remove(0));
     }
   }
+
+  private static void printContents(List<Card> pile, Color color) {
+    int colorCount = 0;
+    for (Card card : pile) {
+      if (card.getSuit().getColor() == color) {
+        colorCount++;
+      }
+    }
+    System.out.printf("%1$s pile contains %2$d %1$s card%4$s: %3$s%n", color, colorCount, pile,
+        (colorCount == 1) ? "" : "s");
+  }
 }
+
